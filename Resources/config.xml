@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../engine/Shopware/Components/Plugin/schema/config.xsd">
+    <elements>
+
+        <element type="boolean">
+            <name>active</name>
+            <label>Aktiv</label>
+        </element>
+
+        <element type="text">
+            <name>server</name>
+            <label>LiveZilla Server Adresse:</label>
+            <description lang="de">https://{www.YOUR-DOMAIN.de}/{LiveZilla-Folder}/api/v2/api.php</description>
+        </element>
+
+        <element type="text">
+            <name>user</name>
+            <label>LiveZilla API-User:</label>
+        </element>
+
+        <element type="text">
+            <name>pass</name>
+            <label>LiveZilla API-Pass:</label>
+        </element>
+
+    </elements>
+</config>
