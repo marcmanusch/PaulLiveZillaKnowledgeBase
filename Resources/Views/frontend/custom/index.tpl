@@ -2,7 +2,7 @@
 
 {block name="frontend_custom_article_content"}
 
-    {if $sCustomPage.id == $paulPageID}
+    {if $sCustomPage.id == $paulPageID && $paulActive}
 
         {function name=printFAQ}
             {foreach $items as $item}
