@@ -9,6 +9,11 @@
         </element>
 
         <element type="text">
+            <name>paulPageID</name>
+            <label>Shopseiten ID:</label>
+        </element>
+
+        <element type="text">
             <name>server</name>
             <label>LiveZilla Server Adresse:</label>
             <description lang="de">https://{www.YOUR-DOMAIN.de}/{LiveZilla-Folder}/api/v2/api.php</description>
