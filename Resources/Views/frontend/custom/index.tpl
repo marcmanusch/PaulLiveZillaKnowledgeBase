@@ -2,33 +2,36 @@
 
 {block name="frontend_custom_article_content"}
 
-    {if $paulError}
+    {if $sCustomPage.id == $paulPageID}
 
-        {s name="paulFaqError"}Es wurden leider keine Einträge in den FAQs gefunden.{/s}
+        {if $paulError}
 
-    {elseif $sCustomPage.id == $paulPageID && $paulActive}
+            {s name="paulFaqError"}Es wurden leider keine Einträge in den FAQs gefunden.{/s}
 
-        {function name=printFAQ}
-            {foreach $items as $item}
-                <div class="collapse--header">
-                    {$item['Title']}
-                    <span class="collapse--toggler"></span>
-                </div>
-                <div class="collapse--content">
-                    {if $item['children']}
-                        {call name=printFAQ items=$item['children']}
+        {elseif $sCustomPage.id == $paulPageID && $paulActive}
 
-                    {else}
-                        <p>{$item.Value}</p>
-                    {/if}
+            {function name=printFAQ}
+                {foreach $items as $item}
+                    <div class="collapse--header">
+                        {$item['Title']}
+                        <span class="collapse--toggler"></span>
+                    </div>
+                    <div class="collapse--content">
+                        {if $item['children']}
+                            {call name=printFAQ items=$item['children']}
 
-                </div>
-            {/foreach}
+                        {else}
+                            <p>{$item.Value}</p>
+                        {/if}
 
-        {/function}
+                    </div>
+                {/foreach}
 
-        {call name=printFAQ items=$paulKnowledge}
+            {/function}
 
+            {call name=printFAQ items=$paulKnowledge}
+
+        {/if}
     {else}
 
         {$smarty.block.parent}
