@@ -6,6 +6,7 @@
     <version>1.0.0</version>
     <compatibility minVersion="5.2.0"/>
     <author>Marc Manusch</author>
+    <link>https://github.com/marcmanusch</link>
 
     <changelog version="1.0.0">
         <changes lang="de">Release</changes>
