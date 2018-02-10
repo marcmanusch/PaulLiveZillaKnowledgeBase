@@ -2,7 +2,11 @@
 
 {block name="frontend_custom_article_content"}
 
-    {if $sCustomPage.id == $paulPageID && $paulActive}
+    {if $paulError}
+
+        {s name="paulFaqError"}Es wurden leider keine Einträge in den FAQs gefunden.{/s}
+
+    {elseif $sCustomPage.id == $paulPageID && $paulActive}
 
         {function name=printFAQ}
             {foreach $items as $item}

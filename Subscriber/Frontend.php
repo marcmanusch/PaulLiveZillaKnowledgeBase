@@ -28,7 +28,7 @@ class Frontend implements SubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'Enlight_Controller_Action_PostDispatchSecure_Frontend' => 'onFrontendPostDispatch',
+            'Enlight_Controller_Action_PostDispatchSecure_Frontend_Custom' => 'onFrontendPostDispatch',
         ];
     }
 
@@ -78,8 +78,10 @@ class Frontend implements SubscriberInterface
 
         $response = json_decode($server_output);
 
-        if (count($response->KnowledgeBaseEntries) == 0)
-            exit("No KnowledgeBase entries found");
+
+        if (count($response->KnowledgeBaseEntries) == 0) {
+            $view->assign('paulError', true);
+        }
 
         $paulKnowledge = [];
 
