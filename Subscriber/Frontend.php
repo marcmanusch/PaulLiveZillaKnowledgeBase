@@ -48,6 +48,9 @@ class Frontend implements SubscriberInterface
         $paulServer = $config['server'];
         $paulUser = $config['user'];
         $paulPass = $config['pass'];
+        $paulPageID = $config['paulPageID'];
+
+
 
         $apiURL = $paulServer;
 
@@ -111,6 +114,7 @@ class Frontend implements SubscriberInterface
         }
 
         $view->assign('paulKnowledge', buildTree($paulKnowledge, 1));
+        $view->assign('paulPageID', $paulPageID);
 
     }
 }
