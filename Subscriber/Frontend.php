@@ -49,6 +49,8 @@ class Frontend implements SubscriberInterface
         $paulUser = $config['user'];
         $paulPass = $config['pass'];
         $paulPageID = $config['paulPageID'];
+        $paulActive = $config['active'];
+
 
 
 
@@ -115,6 +117,10 @@ class Frontend implements SubscriberInterface
 
         $view->assign('paulKnowledge', buildTree($paulKnowledge, 1));
         $view->assign('paulPageID', $paulPageID);
+        $view->assign('paulActive', $paulActive);
+
+
+
 
     }
 }
