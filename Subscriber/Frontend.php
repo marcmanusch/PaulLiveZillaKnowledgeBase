@@ -3,7 +3,6 @@
 namespace PaulLiveZillaKnowledgeBase\Subscriber;
 
 use Enlight\Event\SubscriberInterface;
-use LiveZillaApi;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
@@ -41,19 +40,33 @@ class Frontend implements SubscriberInterface
         $controller = $args->getSubject();
         $view = $controller->View();
         $view->addTemplateDir($this->container->getParameter('paul_live_zilla_knowledge_base.plugin_dir') . '/Resources/Views');
-
         $config = $this->container->get('shopware.plugin.config_reader')->getByPluginName('PaulLiveZillaKnowledgeBase');
 
-        // get plugin settings
+        // Get plugin settings
         $paulServer = $config['server'];
         $paulUser = $config['user'];
         $paulPass = $config['pass'];
         $paulPageID = $config['paulPageID'];
         $paulActive = $config['active'];
+        $paulKnowledge = [];
 
+        // Get current page ID
+        $sCustomPage = $view->getAssign('sCustomPage');
+        $id = $sCustomPage['id'];
 
+        // Check if current View is ID of FAQ page AND plugin is active
+        if ($paulPageID == $id & $paulActive == 1) {
+            $paulKnowledge[] = static::getKnowledge($paulServer, $paulUser, $paulPass);
+            $paulKnowledgeTree[] = static::buildTree($paulKnowledge, 1);
 
+            // Assign FAQ to view
+            $view->assign('paulKnowledge', $paulKnowledgeTree);
+        }
 
+    }
+
+    public static function getKnowledge($paulServer, $paulUser, $paulPass)
+    {
         $apiURL = $paulServer;
 
         // authentication parameters
@@ -78,11 +91,6 @@ class Frontend implements SubscriberInterface
 
         $response = json_decode($server_output);
 
-
-        if (count($response->KnowledgeBaseEntries) == 0) {
-            $view->assign('paulError', true);
-        }
-
         $paulKnowledge = [];
 
         foreach ($response->KnowledgeBaseEntries as $obj) {
@@ -99,30 +107,21 @@ class Frontend implements SubscriberInterface
             $paulKnowledge[] = $paulKnowledgeEntrie;
 
         }
+    }
 
-        function buildTree(array $paulKnowledge, $parentId = 1)
-        {
-            $branch = array();
+    public static function buildTree(array $paulKnowledge, $parentId = 1)
+    {
+        $branch = array();
 
-            foreach ($paulKnowledge as $element) {
-                if ((string)$element['ParentId'] === (string)$parentId) {
-                    $children = buildTree($paulKnowledge, $element['Id']);
-                    if ($children) {
-                        $element['children'] = $children;
-                    }
-                    $branch[] = $element;
+        foreach ($paulKnowledge as $element) {
+            if ((string)$element['ParentId'] === (string)$parentId) {
+                $children = static::buildTree($paulKnowledge, $element['Id']);
+                if ($children) {
+                    $element['children'] = $children;
                 }
+                $branch[] = $element;
             }
-
-            return $branch;
         }
-
-        $view->assign('paulKnowledge', buildTree($paulKnowledge, 1));
-        $view->assign('paulPageID', $paulPageID);
-        $view->assign('paulActive', $paulActive);
-
-
-
-
+        return $branch;
     }
 }

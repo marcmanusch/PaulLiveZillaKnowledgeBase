@@ -3,10 +3,15 @@
         xsi:noNamespaceSchemaLocation="../../../engine/Shopware/Components/Plugin/schema/plugin.xsd">
     <label lang="de">LiveZilla Wissensbasis Integration</label>
 
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <compatibility minVersion="5.2.0"/>
     <author>Marc Manusch</author>
     <link>https://github.com/marcmanusch</link>
+
+
+    <changelog version="1.0.1">
+        <changes lang="de">Fix - only call API if correct page</changes>
+    </changelog>
 
     <changelog version="1.0.0">
         <changes lang="de">Release</changes>
