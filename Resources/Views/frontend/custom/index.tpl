@@ -5,10 +5,8 @@
     {if $sCustomPage.id == $paulPageID}
 
         {if $paulError}
-
-            {s name="paulFaqError"}Es wurden leider keine Einträge in den FAQs gefunden.{/s}
-
-        {elseif $sCustomPage.id == $paulPageID && $paulActive}
+            <h2>{s name="paulFaqError"}Es wurden leider keine Einträge in den FAQs gefunden.{/s}</h2>
+        {elseif $sCustomPage.id == $paulPageID}
 
             {function name=printFAQ}
                 {foreach $items as $item}
