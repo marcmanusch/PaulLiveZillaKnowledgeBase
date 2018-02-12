@@ -2,8 +2,6 @@
 
 {block name="frontend_custom_article_content"}
 
-    {if $sCustomPage.id == $paulPageID}
-
         {if $paulError}
             <h2>{s name="paulFaqError"}Es wurden leider keine Einträge in den FAQs gefunden.{/s}</h2>
         {elseif $sCustomPage.id == $paulPageID}
@@ -30,10 +28,6 @@
             {call name=printFAQ items=$paulKnowledge}
 
         {/if}
-    {else}
 
-        {$smarty.block.parent}
-
-    {/if}
 
 {/block}
