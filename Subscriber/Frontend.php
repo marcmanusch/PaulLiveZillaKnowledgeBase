@@ -62,8 +62,6 @@ class Frontend implements SubscriberInterface
             // Assign FAQ to view
             $view->assign('paulKnowledge', $paulKnowledgeTree);
 
-        } else {
-            $view->assign('paulError', true);
         }
 
     }
